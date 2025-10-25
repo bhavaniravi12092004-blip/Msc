@@ -1,3 +1,95 @@
+#include <iostream.h>
+#define MAX 10
+int main() {
+int n;
+int adj[MAX][MAX], closure[MAX][MAX];
+cout << "Enter the number of vertices: ";
+cin >> n;
+cout << "Enter adjacency matrix of the graph (0/1):\n";
+for (int i = 0; i < n; i++) {
+for (int j = 0; j < n; j++) {
+cin >> adj[i][j];
+closure[i][j] = adj[i][j]; // initialize closure matrix
+}
+}
+// Warshall’s Algorithm
+for (int k = 0; k < n; k++) {
+for (int i = 0; i < n; i++) {
+for (int j = 0; j < n; j++) {
+closure[i][j] = closure[i][j] || (closure[i][k] && closure[k][j]);
+}
+}
+}
+cout << "\nTransitive Closure of the Graph:\n";
+for (int i = 0; i < n; i++) {
+for (int j = 0; j < n; j++) {
+cout << closure[i][j] << " ";
+}
+cout << endl;
+}
+return 0;
+}
+
+#include <iostream.h> int n, W; 
+int weight[20], profit[20]; int maxProfit = 0; void knapsack(int i, int currentWeight, int currentProfit) {     if (currentWeight <= W && currentProfit > maxProfit) 
+        maxProfit = currentProfit;     if (i == n) return;     // Include the current item     if (currentWeight + weight[i] <= W)  
+ 
+B.V.SARAVANAN Guest Lecturer, Department of Computer Science, Government Arts College, Paramakud-623701 
+ 
+        knapsack(i + 1, currentWeight + weight[i], currentProfit + profit[i]); 
+    // Exclude the current item 
+    knapsack(i + 1, currentWeight, currentProfit); 
+} int main() { 
+    cout << "Enter number of items: ";     cin >> n; 
+    cout << "Enter knapsack capacity: ";     cin >> W; 
+    cout << "Enter weight and profit of each item:\n"; 
+    for (int i = 0; i < n; i++) { 
+        cin >> weight[i] >> profit[i]; 
+    } 
+    knapsack(0, 0, 0); 
+    cout << "Maximum Profit = " << maxProfit << endl;     return 0; 
+} 
+#include <iostream.h> 
+#define N 2  // Matrix size (2x2 for simplicity) void strassen(int A[N][N], int B[N][N], int C[N][N]) { int M1 = (A[0][0] + A[1][1]) * (B[0][0] + B[1][1]); int M2 = (A[1][0] + A[1][1]) * B[0][0]; int M3 = A[0][0] * (B[0][1] - B[1][1]); int M4 = A[1][1] * (B[1][0] - B[0][0]); int M5 = (A[0][0] + A[0][1]) * B[1][1]; int M6 = (A[1][0] - A[0][0]) * (B[0][0] + B[0][1]); int M7 = (A[0][1] - A[1][1]) * (B[1][0] + B[1][1]); C[0][0] = M1 + M4 - M5 + M7; 
+C[0][1] = M3 + M5; 
+C[1][0] = M2 + M4; 
+C[1][1] = M1 - M2 + M3 + M6; 
+} void main ()  { int A[N][N], B[N][N], C[N][N]; cout << "Enter 2x2 Matrix A:\n"; for (int i=0;i<N;i++) for (int j=0;j<N;j++) cin >> A[i][j]; cout << "Enter 2x2 Matrix B:\n"; for (int i=0;i<N;i++) for (int j=0;j<N;j++) cin >> B[i][j]; strassen(A,B,C); cout << "\nResultant Matrix (A * B):\n"; for (int i=0;i<N;i++)  
+{ for (int j=0;j<N;j++) cout << C[i][j] << " "; cout << endl; 
+} 
+ 
+ 
+ 
+ 
+getch(); } 
+#include <iostream> using namespace std; #define INF 9999 int main() { int n = 4; int cost[4][4] = { 
+{0, 5, 7, 0}, 
+{5, 0, 9, 8}, 
+{7, 9, 0, 6}, 
+{0, 8, 6, 0} 
+}; int selected[4] = {0};  // To track vertices included in MST selected[0] = 1;        // Start from first vertex 
+ 
+int edges = 0; int mincost = 0; cout << "Edges in Minimum Cost Spanning Tree:\n"; while (edges < n - 1) { int min = INF, a = -1, b = -1; for (int i = 0; i < n; i++) { if (selected[i]) { for (int j = 0; j < n; j++) { if (!selected[j] && cost[i][j]) { if (cost[i][j] < min) { min = cost[i][j]; a = i; b = j; } }}}} cout << a << " -> " << b << " = " << min << endl; mincost += min; selected[b] = 1; edges++; } cout << "Minimum Cost = " << mincost << endl; return 0; 
+} 
+
+#include <iostream.h> #include <conio.h> const int INF = 9999; // Infinity const int V = 4;      // Number of vertices void main() 
+{ 
+ 
+int graph[V][V] = { {0, 5, INF, 10}, 
+{INF, 0, 3, INF}, 
+{INF, INF, 0, 1}, {INF, INF, INF, 0} }; int dist[V][V]; // Step 1: Initialize distance matrix for(int i=0; i<V; i++) for(int j=0; j<V; j++) dist[i][j] = graph[i][j]; 
+// Step 2: Floyd-Warshall Algorithm for(int k=0; k<V; k++) { for(int i=0; i<V; i++) { for(int j=0; j<V; j++) { if(dist[i][k] + dist[k][j] < dist[i][j]) dist[i][j] = dist[i][k] + dist[k][j]; 
+} 
+} 
+} 
+ 
+// Step 3: Print shortest distance matrix cout << "Shortest Distance Matrix:\n"; for(int i=0; i<V; i++) { for(int j=0; j<V; j++) { if(dist[i][j] == INF) cout << "INF\t"; else cout << dist[i][j] << "\t"; 
+}cout << endl; } getch(); 
+} 
+
+
+
+
 1(a). PROGRAM USING LIST
 
 Aim:
